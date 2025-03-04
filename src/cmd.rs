@@ -48,7 +48,12 @@ pub fn cmd_mode() {
                             while input.chars().nth(i) != Some('%') {
                                 variable_to_output += &input.chars().nth(i).unwrap().to_string();
                             }
-                            println!("{}", environment_variables.get(&variable_to_output).unwrap())
+                            println!("Variable to output {}", variable_to_output);
+                            if environment_variables.contains_key(&variable_to_output) {
+                                println!("{}", environment_variables.get(&variable_to_output).unwrap());
+                            } else {
+                                println!("{} is not defined.", variable_to_output)
+                            }
                         },
                         _ => {}
                     }
