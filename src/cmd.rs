@@ -7,13 +7,7 @@ use std::collections::HashMap;
 pub fn cmd_mode() {
     println!("Entering CMD mode.");
     let mut environment_variables: HashMap<String, String> = HashMap::new();
-    
-    
-    if cfg!(target_os = "windows"){
-        println!("Running on Windows, if a command is not implemented, rash will fallback to using cmd.exe");
-    } else {
-        println!("Not running on Windows, if a command is not implemented rash will panic and terminate with exit code 91")
-    }
+
     loop {
         print!("rash - {} - cmd> ", VERSION_NUMBER);
         io::stdout().flush().expect("Failed to flush stdout");
