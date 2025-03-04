@@ -1,8 +1,10 @@
-use std::io::{self, Write};
+use std::{env, io::{self, Write}};
 use cmd::cmd_mode;
 use libc::{fork, execvp, waitpid, WUNTRACED};
 
 mod cmd;
+mod cmd_parse;
+mod utils;
 
 pub const VERSION_NUMBER: &str = "1.0";
 
@@ -25,8 +27,7 @@ fn main() {
             "help" => println!("Available commands: exit, help, cd"),
             "hello" => println!("Hi! :D"),
             "whereami" => {
-                let current_path = std::env::current_dir();
-                println!("You are currently in the directory {}", current_path.display())
+                println!("Your current directory is '{}'", utils::get_current_directory());
             },
             _ => println!("{} : Command not found.", trimmed_input)
         }
