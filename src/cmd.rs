@@ -1,12 +1,14 @@
 use crate::{utils, VERSION_NUMBER};
 use std::io::{self, Write};
 use std::collections::HashMap;
+use std::env;
 
 // For now we will pretend that paths have \ as the path seperator
 // even for unix/unix-like systems
 pub fn cmd_mode() {
     println!("Entering CMD mode.");
     let mut environment_variables: HashMap<String, String> = HashMap::new();
+    environment_variables.insert(String::from("USERNAME"), whoami::username());
 
     loop {
         print!("rash - {} - cmd> ", VERSION_NUMBER);
@@ -21,16 +23,12 @@ pub fn cmd_mode() {
 
 
         if formatted_input.starts_with("set") {
-            let mut i = 2;
-            let mut setting_variable_value: bool = false;
-            let mut i = 2;
-            let split_input: Vec<&str> = formatted_input.split('=').collect();
-
-            if split_input.len() != 2 {
-                println!("Invalid characters in variable name or value for {}", input);
-            } else {
-                environment_variables.insert(split_input.get(0).unwrap().to_string(), split_input.get(1).unwrap().to_string());
+            if formatted_input == "set" {
+                for (key, value) in &environment_variables {
+                    println!("{key}={value}");
+                }
             }
+            
         } else if formatted_input.starts_with("echo"){
             if !input.contains('%') {
                 println!("{}", input.strip_prefix("echo").unwrap().trim());

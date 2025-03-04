@@ -3,7 +3,6 @@ use cmd::cmd_mode;
 use libc::{fork, execvp, waitpid, WUNTRACED};
 
 mod cmd;
-mod cmd_parse;
 mod utils;
 
 pub const VERSION_NUMBER: &str = "1.0";
