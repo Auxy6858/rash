@@ -10,7 +10,12 @@ mod utils;
 pub const VERSION_NUMBER: &str = "1.0";
 
 fn main() {
+    let mut username = whoami::username();
+    let mut devicename = whoami::devicename();
     loop {
+        if !username.is_empty() & !devicename.is_empty() {
+            print!("{username}@{devicename} ");
+        }
         print!("rash - {VERSION_NUMBER}> ");
         io::stdout().flush().unwrap();
 
