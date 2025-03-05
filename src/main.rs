@@ -14,7 +14,7 @@ fn main() {
     let mut devicename = whoami::devicename();
     loop {
         if !username.is_empty() & !devicename.is_empty() {
-            print!("{username}@{devicename} ");
+            print!("\x1b[35m{username}\x1b[37m@\x1b[33m{devicename} \x1b[37m");
         }
         print!("rash - {VERSION_NUMBER}> ");
         io::stdout().flush().unwrap();
