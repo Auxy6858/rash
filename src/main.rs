@@ -1,9 +1,11 @@
 use std::{env, io::{self, Write}};
 use cmd::cmd_mode;
+#[cfg(target_os = "windows")]
 use winapi::um::{processenv::GetStdHandle, wincon::{FillConsoleOutputAttribute, FillConsoleOutputCharacterA, GetConsoleScreenBufferInfo, SetConsoleCursorPosition, CONSOLE_SCREEN_BUFFER_INFO, COORD}};
+#[cfg(target_os = "windows")]
 use winapi::um::winnt::HANDLE;
+#[cfg(target_os = "windows")]
 use winapi::um::winbase::STD_OUTPUT_HANDLE;
-
 mod cmd;
 mod utils;
 
@@ -37,9 +39,10 @@ fn main() {
                 "exit" => break,
                 "help" => println!("Available commands: exit, help, cd"),
                 "hello" => println!("Hi! :D"),
-                "version" => println!("{VERSION_NUMBER}"),
+                "version" => println!("\x1b[33mRash\x1b[37m version {VERSION_NUMBER}"),
                 "clear" => {
                     if cfg!(target_os = "windows") {
+                        #[cfg(target_os = "windows")]
                         unsafe {
                             let handle: HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
                             if handle.is_null() {
