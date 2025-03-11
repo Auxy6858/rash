@@ -1,7 +1,6 @@
-use crate::{utils, VERSION_NUMBER};
+use crate::VERSION_NUMBER;
 use std::io::{self, Write};
 use std::collections::HashMap;
-use std::env;
 
 // For now we will pretend that paths have \ as the path seperator
 // even for unix/unix-like systems
